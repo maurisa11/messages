@@ -13,7 +13,13 @@ export class HomeComponent implements OnInit {
   public text: string = '';
 
   constructor(private messagesService: MessagesService) {
-
+    this.messagesService.messageReceived.subscribe(
+      response => {
+        if (this.messages) {
+          this.messages.unshift(response);
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -24,7 +30,6 @@ export class HomeComponent implements OnInit {
     this.messagesService.getMessages()
       .subscribe(response => {
         this.messages = response as Message[];
-        console.log(this.messages);
       }, error => {
         console.error(error);
       });
@@ -35,7 +40,6 @@ export class HomeComponent implements OnInit {
       .subscribe(response => { 
         if (response) {
           this.text = '';
-          this.loadMessages();
         }
       }, 
       error => { 

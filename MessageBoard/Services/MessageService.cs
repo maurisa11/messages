@@ -9,7 +9,7 @@ namespace MessageBoard.Services
 {
 	public interface IMessageService
 	{
-		bool CreateMessage(string text);
+		Message CreateMessage(string text);
 
 		IEnumerable<Message> GetMessages();
 	}
@@ -22,7 +22,7 @@ namespace MessageBoard.Services
 			this.unitOfWork = unitOfWork;
 
 		}
-		public bool CreateMessage(string text)
+		public Message CreateMessage(string text)
 		{
 			var message = new Message()
 			{
@@ -30,11 +30,16 @@ namespace MessageBoard.Services
 				Text = text
 			};
 
-			return unitOfWork.MessageRepository.Insert(message);
+			if (unitOfWork.MessageRepository.Insert(message))
+				return message;
+
+			return null;
 		}
 		public IEnumerable<Message> GetMessages()
 		{
-			return unitOfWork.MessageRepository.GetAll();
+			return unitOfWork.MessageRepository
+				.GetAll(null, 
+				o => o.OrderByDescending(x => x.CreatedDate));
 		}
 	}
 

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using MessageBoard.Hubs;
 
 namespace MessageBoard
 {
@@ -27,6 +28,25 @@ namespace MessageBoard
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			//services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+			//{
+			//	builder
+			//	.AllowAnyMethod()
+			//	.AllowAnyHeader()
+			//	.WithOrigins("http://localhost:4200");
+			//}));
+
+
+			//services.AddCors(o => o.AddPolicy("CorsPolicy", builder => {
+			//	builder
+			//	.AllowAnyMethod()
+			//	.AllowAnyHeader()
+			//	.AllowCredentials()
+			//	.WithOrigins("http://localhost:4200");
+			//}));
+
+			services.AddCors();
+
 			services.AddControllers();
 			services.AddDbContext<MessageContext>(options =>
 			options.UseSqlServer(
@@ -35,11 +55,15 @@ namespace MessageBoard
 						)
 			);
 			services.AddInjectedDependencies();
+			services.AddSignalR();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			//app.UseCors("CorsPolicy");
+			app.UseCors();
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -54,9 +78,30 @@ namespace MessageBoard
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+				endpoints.MapHub<MessageHub>("/message");
+			});
+
+			app.UseSpa(spa =>
+			{
+				// To learn more about options for serving an Angular SPA from ASP.NET Core,
+				// see https://go.microsoft.com/fwlink/?linkid=864501
+
+				spa.Options.SourcePath = "MessageBoardClient";
+
+				if (env.IsDevelopment())
+				{
+					spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+				}
 			});
 
 			UpdateDatabase(app);
+
+			//app.UseSignalR(options =>
+			//{
+			//	options.MapHub<MessageHub>("/MessageHub");
+			//});
+
+
 		}
 
 		private static void UpdateDatabase(IApplicationBuilder app)

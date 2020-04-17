@@ -1,6 +1,8 @@
-﻿using MessageBoard.Services;
+﻿using MessageBoard.Hubs;
+using MessageBoard.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace MessageBoard.Controllers
 {
@@ -9,10 +11,13 @@ namespace MessageBoard.Controllers
 	public class MessagesController : ControllerBase
 	{
 		private readonly IMessageService messageService;
+		private IHubContext<MessageHub> messageHub;
 
-		public MessagesController(IMessageService messageService)
+		public MessagesController(IMessageService messageService,
+			IHubContext<MessageHub> messageHub)
 		{
 			this.messageService = messageService;
+			this.messageHub = messageHub;
 		}
 
 		[HttpGet]
@@ -25,9 +30,9 @@ namespace MessageBoard.Controllers
 		[HttpPost("[action]")]
 		public JsonResult Create([FromBody]string text)
 		{
-			var created = messageService.CreateMessage(text);
-
-			return new JsonResult(created);
+			var newMessage = messageService.CreateMessage(text);
+			messageHub.Clients.All.SendAsync("MessageReceived", newMessage);
+			return new JsonResult(newMessage != null);
 		}
 	}
 }

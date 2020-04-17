@@ -6002,11 +6002,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desarrollo\\Messages\\MessageBoard\\MessageBoard.csproj",
+      "projectUniqueName": "C:\\Desarrollo\\MessagesBoardSolution\\MessageBoard\\MessageBoard.csproj",
       "projectName": "MessageBoard",
-      "projectPath": "C:\\Desarrollo\\Messages\\MessageBoard\\MessageBoard.csproj",
+      "projectPath": "C:\\Desarrollo\\MessagesBoardSolution\\MessageBoard\\MessageBoard.csproj",
       "packagesPath": "C:\\Users\\lau_m\\.nuget\\packages\\",
-      "outputPath": "C:\\Desarrollo\\Messages\\MessageBoard\\obj\\",
+      "outputPath": "C:\\Desarrollo\\MessagesBoardSolution\\MessageBoard\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
