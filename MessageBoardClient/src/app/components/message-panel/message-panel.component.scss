@@ -1,0 +1,30 @@
+.mat-app-background {
+    height: calc(100vh - 100px);
+
+    .message-panel {
+        height: calc(100% - 60px);
+        overflow-y: scroll;
+
+        .message-card {
+            padding: 15px 10px 0 10px;
+
+            .message-time {
+                text-align: right;
+                font-size: 10px;
+            }
+        }
+    }
+
+    .button-panel {
+        padding: 0 10px 0 10px;
+        
+        .message-input {
+            width: 60%;
+        }
+
+        .send-button {
+            margin-left: 20px;
+        }
+
+    }
+}

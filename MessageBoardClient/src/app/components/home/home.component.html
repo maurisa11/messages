@@ -1,16 +1,7 @@
-<div class="mat-app-background">
-    <div class="panel" *ngIf="messages">
-        <div *ngFor="let message of messages">
-            <div class="message">
-                <mat-card>{{message.text}}</mat-card>
-            </div>
-        </div>
-    </div>
-    <div style="padding:20px" class="sendMessagePanel">
-        <mat-form-field class="inputMessage">
-            <mat-label>Write a new message</mat-label>
-            <input matInput [(ngModel)]="text">
-        </mat-form-field>
-        <button class="sendButton" (click)="createMessage()" mat-flat-button color="primary">Send!</button>
-    </div>
-</div>
+<mat-toolbar class="header" color="primary">
+    <span class="title">Messages Board</span>
+</mat-toolbar>
+<app-message-panel></app-message-panel>
+<mat-toolbar class="footer" color="secondary">
+    <span class="title">Developed by Laura Maine</span>
+</mat-toolbar>

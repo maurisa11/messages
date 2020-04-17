@@ -37,11 +37,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { MessagesService } from './services/messages.service';
 import { FormsModule } from '@angular/forms';
+import { MessagePanelComponent } from './components/message-panel/message-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MessagePanelComponent
   ],
   imports: [
     FormsModule,

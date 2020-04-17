@@ -1,0 +1,20 @@
+<div class="mat-app-background">
+    <div class="message-panel" *ngIf="messages">
+        <div *ngFor="let message of messages">
+            <div class="message-card">
+                <mat-card>{{message.text}}
+                </mat-card>
+                <div class="message-time" color="secondary">
+                    <label>{{message.createdDate |date:"medium"}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-panel">
+        <mat-form-field class="message-input">
+            <mat-label>Write a new message</mat-label>
+            <input matInput [(ngModel)]="text">
+        </mat-form-field>
+        <button class="send-button" (click)="createMessage()" mat-flat-button color="primary">Send!</button>
+    </div>
+</div>
