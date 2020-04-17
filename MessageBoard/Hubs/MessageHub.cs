@@ -8,11 +8,5 @@ using System.Threading.Tasks;
 namespace MessageBoard.Hubs
 {
 	public class MessageHub : Hub
-	{
-		public async Task NewMessage(string msg)
-		{
-			await Clients.All.SendAsync("MessageReceived", msg);
-		}
-	}  
-
+	{}  
 }

@@ -1,15 +1,4 @@
-<!-- 
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <p>home works!</p> -->
-
-<!-- </div></div>
-   
-</div> -->
-
-
-<div class="mat-app-background wrapper" style="height: 100%">
+<div class="mat-app-background" style="height: 100%">
     <div *ngIf="messages">
         <div *ngFor="let message of messages">
             <div style="padding:20px">
@@ -17,18 +6,11 @@
             </div>
         </div>
     </div>
-
-
-    
- 
     <div style="padding:20px">
-        <mat-form-field class="example-full-width">
-            <mat-label>Escribe un nuevo mensaje</mat-label>
-            <input matInput placeholder="Ex. Pizza" [(ngModel)]="text">
+        <mat-form-field class="inputMessage">
+            <mat-label>Write a new message</mat-label>
+            <input matInput [(ngModel)]="text">
         </mat-form-field>
-        <button mat-icon-button>
-            <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-        </button>
-        <button (click)="createMessage()" mat-flat-button color="primary">Click me!</button>
+        <button class="sendButton" (click)="createMessage()" mat-flat-button color="primary">Send!</button>
     </div>
 </div>
