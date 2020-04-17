@@ -13,8 +13,8 @@ export class MessagesService {
   private connectionIsEstablished = false;
 
   private endpoints = {
-    getMessages: 'https://localhost:44330/api/messages',
-    createMessage: 'https://localhost:44330/api/messages/create'
+    getMessages: '/api/messages',
+    createMessage: '/api/messages/create'
   }
   constructor(private http: HttpClient) {
     this.createConnection();
@@ -45,7 +45,6 @@ export class MessagesService {
 
   private registerOnServerEvents(): void {
     this.hubConnection.on('MessageReceived', (data: any) => {
-      alert("HUBOK");
       this.messageReceived.emit(data);  
     });
   }
