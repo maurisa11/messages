@@ -1,12 +1,12 @@
-<div class="mat-app-background" style="height: 100%">
-    <div *ngIf="messages">
+<div class="mat-app-background">
+    <div class="panel" *ngIf="messages">
         <div *ngFor="let message of messages">
-            <div style="padding:20px">
+            <div class="message">
                 <mat-card>{{message.text}}</mat-card>
             </div>
         </div>
     </div>
-    <div style="padding:20px">
+    <div style="padding:20px" class="sendMessagePanel">
         <mat-form-field class="inputMessage">
             <mat-label>Write a new message</mat-label>
             <input matInput [(ngModel)]="text">
